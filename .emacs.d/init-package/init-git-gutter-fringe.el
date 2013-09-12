@@ -1,4 +1,4 @@
 
 
 (require 'git-gutter-fringe)
-(global-set-key "C-c C-g" 'git-gutter:toggle)
+(global-set-key (kbd "C-c C-g") 'git-gutter:toggle)

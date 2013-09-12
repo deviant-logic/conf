@@ -102,7 +102,16 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
-(el-get 'sync)
+(setq el-get-packages
+      `(git-gutter-fringe
+	magit
+	paredit
+	rainbow-delimiters
+	smex
+	solarized-theme
+	twilight-anti-bright-theme))
+
+(el-get 'sync el-get-packages)
 
 ; (load-theme 'twilight-anti-bright t)
 (load-theme 'solarized-dark t)
