@@ -1,0 +1,9 @@
+#!/bin/sh
+
+GIT_DIR=$HOME/.conf
+export GIT_DIR
+GIT_WORK_TREE=$HOME
+export GIT_WORK_TREE
+
+exec git "$@"
+

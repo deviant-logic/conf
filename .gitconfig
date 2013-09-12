@@ -1,0 +1,10 @@
+
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	amend = commit --amend
+	b = branch
+[user]
+	email = alec@deviant-logic.net
+	name = Alec
