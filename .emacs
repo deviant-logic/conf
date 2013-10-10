@@ -11,6 +11,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-screen t
       disable-command        nil)
+(setq-default indent-tabs-mode nil)
 
 (setq backup-directory-alist
       `(("." . ,(concat (file-name-as-directory user-emacs-directory)
