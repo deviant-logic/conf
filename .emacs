@@ -15,9 +15,9 @@
 
 (setq backup-directory-alist
       `(("." . ,(concat (file-name-as-directory user-emacs-directory)
-			"backup")))
+                        "backup")))
       custom-file (concat (file-name-as-directory user-emacs-directory)
-			  "custom.el"))
+                          "custom.el"))
 
 (setq confirm-nonexistent-file-or-buffer nil)
 (remove-hook 'kill-buffer-query-functions 'process-kill-buffer-query-function)
@@ -29,10 +29,10 @@
 
 (when (eq system-type 'darwin)
   (setq mac-option-modifier  'hyper
-	mac-option-modifier  'super
-	mac-command-modifier 'meta
+        mac-option-modifier  'super
+        mac-command-modifier 'meta
 
-	ns-auto-hide-menu-bar t))
+        ns-auto-hide-menu-bar t))
 
 (when (eq system-type 'gnu/linux)
   (menu-bar-mode -1))
@@ -70,20 +70,20 @@
 (global-set-key (kbd "C-a") 'toggle-bol/bti)
 
 (global-set-key (kbd "C-j")
-		'(lambda ()
-		   (interactive)
-		   (join-line -1)))
+                '(lambda ()
+                   (interactive)
+                   (join-line -1)))
 
 (global-set-key (kbd "C-c j") 'shell)
 (global-set-key (kbd "C-c g") 'magit-status)
 
 (global-set-key (kbd "C-c .")
-		(lambda () 
-		  (interactive)
-		  (find-file "~/.emacs")))
+                (lambda () 
+                  (interactive)
+                  (find-file "~/.emacs")))
 
 (global-set-key (kbd "<C-tab>")
-		'completion-at-point)
+                'completion-at-point)
 
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
@@ -103,14 +103,19 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 (setq el-get-packages
       `(git-gutter-fringe
-	magit
-	paredit
-	rainbow-delimiters
+        magit
+        paredit
+        rainbow-delimiters
 	smex
 	solarized-theme
-	twilight-anti-bright-theme))
+	twilight-anti-bright-theme
+        haskell-mode
+        exec-path-from-shell))
 
 (el-get 'sync el-get-packages)
 
