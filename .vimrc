@@ -13,7 +13,12 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'tpope/vim-commentary'
+
 Bundle 'ervandew/supertab'
+
+Bundle 'godlygeek/tabular'
+Bundle 'rodjek/vim-puppet'
 
 colorscheme vividchalk
 

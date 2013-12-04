@@ -9,8 +9,9 @@
 (scroll-bar-mode   -1)
 (setf ring-bell-function 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq inhibit-startup-screen t
-      disable-command        nil)
+(setq inhibit-startup-screen t)
+(setq disabled-command-function nil)
+
 (setq-default indent-tabs-mode nil)
 
 (setq backup-directory-alist
@@ -74,6 +75,8 @@
                    (interactive)
                    (join-line -1)))
 
+(global-set-key (kbd "C-c m") 'recompile)
+
 (global-set-key (kbd "C-c j") 'shell)
 (global-set-key (kbd "C-c g") 'magit-status)
 
@@ -105,19 +108,25 @@
 
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+(setq el-get-sources
+      `((:name haskell-mode
+	       :type elpa
+	       :repo ("marmalade" . "http://marmalade-repo.org/packages/"))))
 
 (setq el-get-packages
       `(git-gutter-fringe
-        magit
-        paredit
-        rainbow-delimiters
+	magit
+	paredit
+	diminish
+	rainbow-delimiters
 	smex
 	solarized-theme
 	twilight-anti-bright-theme
-        haskell-mode
-        exec-path-from-shell))
+	exec-path-from-shell))
 
-(el-get 'sync el-get-packages)
+(el-get 'sync
+	(append el-get-packages
+		(mapcar 'el-get-source-name el-get-sources)))
 
 ; (load-theme 'twilight-anti-bright t)
 (load-theme 'solarized-dark t)
