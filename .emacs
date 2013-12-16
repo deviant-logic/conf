@@ -75,7 +75,7 @@
                    (interactive)
                    (join-line -1)))
 
-(global-set-key (kbd "C-c m") 'recompile)
+(global-set-key (kbd "C-c m") 'compile)
 
 (global-set-key (kbd "C-c j") 'shell)
 (global-set-key (kbd "C-c g") 'magit-status)

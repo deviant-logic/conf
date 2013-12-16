@@ -68,13 +68,16 @@ bindkey '^X^F' insert-files
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-##### little things #####
+##### interactivity #####
 
 setopt interactive_comments
+export PAGER=less
+export EDITOR=vi
 
 ##### but if I'm in emacs... #####
 
 if [[ $EMACS = t ]]; then
     RPROMPT=""
-    PAGER=cat
+    export PAGER=cat
 fi
+
