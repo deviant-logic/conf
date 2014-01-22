@@ -73,6 +73,7 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt interactive_comments
 export PAGER=less
 export EDITOR=vi
+export REPORTTIME=2
 
 ##### but if I'm in emacs... #####
 
