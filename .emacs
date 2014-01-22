@@ -92,7 +92,13 @@
 (global-unset-key (kbd "C-x C-z"))
 
 (transient-mark-mode -1)
-(setq kill-read-only-ok t)
+
+; read-only
+
+(setq kill-read-only-ok t
+      view-read-only    t)
+
+; el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (setq el-get-user-package-directory
@@ -109,7 +115,10 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (setq el-get-sources
-      `((:name haskell-mode
+      `((:name flycheck
+	       :type github
+	       :pkgname "flycheck/flycheck")
+        (:name haskell-mode
 	       :type elpa
 	       :repo ("marmalade" . "http://marmalade-repo.org/packages/"))))
 

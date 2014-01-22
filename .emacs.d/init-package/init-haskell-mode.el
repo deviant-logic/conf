@@ -2,11 +2,13 @@
 (add-hook 'haskell-mode-hook 'haskell-hook)
 (add-hook 'haskell-cabal-mode-hook 'haskell-cabal-hook)
 
-(custom-set-variables '(haskell-process-type 'cabal-repl))
+(custom-set-variables '(haskell-process-type 'cabal-repl)
+                      '(haskell-font-lock-symbols t))
 
 (defun haskell-hook ()
   ;; Use simple indentation.
   (haskell-indent-mode)
+  (turn-on-haskell-font-lock)
   ; (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
   ; (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
