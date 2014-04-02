@@ -33,7 +33,9 @@
         mac-option-modifier  'super
         mac-command-modifier 'meta
 
-        ns-auto-hide-menu-bar t))
+        ns-auto-hide-menu-bar t
+
+        ns-use-native-fullscreen nil))
 
 (when (eq system-type 'gnu/linux)
   (menu-bar-mode -1))
