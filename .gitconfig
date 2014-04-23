@@ -8,3 +8,5 @@
 [user]
 	email = alec@deviant-logic.net
 	name = Alec
+[push]
+	default = simple

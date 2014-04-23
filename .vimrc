@@ -20,6 +20,10 @@ Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
 Bundle 'rodjek/vim-puppet'
 
+Bundle 'kien/ctrlp.vim'
+
+Bundle 'dag/vim2hs'
+
 colorscheme vividchalk
 
 filetype plugin indent on
