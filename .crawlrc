@@ -1,0 +1,17 @@
+
+name             = scrawl
+
+auto_sacrifice   = true
+
+easy_eat_chunks  = true
+auto_eat_chunks  = true
+auto_drop_chunks = true
+
+equip_unequip    = true
+
+spell_slot       ^= Magic Dart:a
+spell_slot       += Mephitic Cloud:b
+spell_slot       += Blink:c
+spell_slot       += Conjure Flame:d
+spell_slot       += Repel Missiles:e
+spell_slot       += .*:pqrstuvwxyz
