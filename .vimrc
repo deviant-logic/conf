@@ -3,28 +3,55 @@ filetype off
 
 set sw=2
 
+set wildmenu
+set wildmode=longest:full,full
+
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'tpope/vim-commentary'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 
-Bundle 'godlygeek/tabular'
-Bundle 'rodjek/vim-puppet'
+Plugin 'godlygeek/tabular'
+Plugin 'rodjek/vim-puppet'
 
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
-Bundle 'dag/vim2hs'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 
-colorscheme vividchalk
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
 
+Plugin 'dag/vim2hs'
+let g:haskell_conceal_wide = 1
+
+Plugin 'bling/vim-airline'
+let g:airline_powerline_fonts=0
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_right_sep = '«'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_theme='molokai'
+
+call vundle#end()
 filetype plugin indent on
 
+colorscheme vividchalk
