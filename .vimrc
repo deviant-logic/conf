@@ -2,6 +2,10 @@ set nocompatible
 filetype off
 
 set sw=2
+set ts=2
+set expandtab
+
+set list lcs=tab:»\ ,trail:·
 
 set wildmenu
 set wildmode=longest:full,full
