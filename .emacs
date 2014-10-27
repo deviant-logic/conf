@@ -90,6 +90,9 @@
 (global-set-key (kbd "<C-tab>")
                 'completion-at-point)
 
+(global-set-key (kbd "<M-return>")
+                'toggle-frame-fullscreen)
+
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 
