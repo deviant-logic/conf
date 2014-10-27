@@ -30,6 +30,7 @@ fi
 ##### functions #####
 typeset -U fpath
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh/site-functions $fpath)
 fpath=($HOME/.zsh-functions $fpath)
 
 ##### keybindings #####
@@ -66,7 +67,7 @@ autoload insert-files
 zle -N insert-files
 bindkey '^X^F' insert-files
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ##### interactivity #####
 

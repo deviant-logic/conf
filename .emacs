@@ -131,7 +131,7 @@
 	diminish
 	rainbow-delimiters
 	smex
-	solarized-theme
+	solarized-emacs
 	twilight-anti-bright-theme
 	exec-path-from-shell))
 

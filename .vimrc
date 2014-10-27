@@ -10,10 +10,10 @@ set list lcs=tab:»\ ,trail:·
 set wildmenu
 set wildmode=longest:full,full
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
