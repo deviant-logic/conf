@@ -38,8 +38,10 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 
-Plugin 'dag/vim2hs'
 let g:haskell_conceal_wide = 1
+
+Plugin 'raichoo/haskell-vim'
+Plugin 'enomsg/vim-haskellConcealPlus'
 
 Plugin 'bling/vim-airline'
 let g:airline_powerline_fonts=0

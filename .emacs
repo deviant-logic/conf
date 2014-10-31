@@ -125,7 +125,9 @@
 	       :pkgname "flycheck/flycheck")
         (:name haskell-mode
 	       :type elpa
-	       :repo ("marmalade" . "http://marmalade-repo.org/packages/"))))
+	       :repo ("marmalade" . "http://marmalade-repo.org/packages/"))
+        (:name auctex
+               :type elpa)))
 
 (setq el-get-packages
       `(git-gutter-fringe
