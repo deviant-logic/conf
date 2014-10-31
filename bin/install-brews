@@ -1,0 +1,4 @@
+#!/bin/sh
+
+for i in `cat ~/.brew-brews `; do brew install $i; done
+for i in `cat ~/.brew-casks `; do brew cask install $i; done
