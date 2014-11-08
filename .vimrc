@@ -38,6 +38,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 
+Plugin 'derekwyatt/vim-scala'
 let g:haskell_conceal_wide = 1
 
 Plugin 'raichoo/haskell-vim'
