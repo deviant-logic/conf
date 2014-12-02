@@ -1,6 +1,8 @@
 set nocompatible
 filetype off
 
+set gcr=a:blinkon0
+
 set sw=2
 set ts=2
 set expandtab
