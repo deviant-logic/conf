@@ -59,7 +59,7 @@ setopt multios
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
-unalias run-help
+# unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
 
@@ -67,7 +67,8 @@ autoload insert-files
 zle -N insert-files
 bindkey '^X^F' insert-files
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+syntax_highlighting=/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -r $syntax_highlighting ]] && source $syntax_highlighting
 
 ##### interactivity #####
 
