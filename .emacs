@@ -123,9 +123,9 @@
       `((:name flycheck
 	       :type github
 	       :pkgname "flycheck/flycheck")
-        (:name haskell-mode
-	       :type elpa
-	       :repo ("marmalade" . "http://marmalade-repo.org/packages/"))
+        ;; (:name haskell-mode
+	;;        :type elpa
+	;;        :repo ("marmalade" . "http://marmalade-repo.org/packages/"))
         (:name auctex
                :type elpa)))
 
@@ -134,6 +134,7 @@
 	magit
 	paredit
 	diminish
+        haskell-mode
 	rainbow-delimiters
 	smex
 	solarized-emacs

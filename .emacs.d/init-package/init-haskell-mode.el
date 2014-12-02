@@ -1,14 +1,15 @@
 
 (add-hook 'haskell-mode-hook 'haskell-hook)
+(remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-cabal-mode-hook 'haskell-cabal-hook)
 
 (custom-set-variables '(haskell-process-type 'cabal-repl)
                       '(haskell-font-lock-symbols t))
 
 (defun haskell-hook ()
-  ;; Use simple indentation.
-  (haskell-indent-mode)
+  (turn-on-haskell-indent)
   (turn-on-haskell-font-lock)
+  (turn-on-haskell-decl-scan)
   ; (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
   ; (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
@@ -48,15 +49,9 @@
   ; (define-key haskell-mode-map (kbd "M-.") 'haskell-mode-tag-find)
 
   ;; Indent the below lines on columns after the current column.
-  (define-key haskell-mode-map (kbd "C-<right>")
-    (lambda ()
-      (interactive)
-      (haskell-move-nested 1)))
+  (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
   ;; Same as above but backwards.
-  (define-key haskell-mode-map (kbd "C-<left>")
-    (lambda ()
-      (interactive)
-      (haskell-move-nested -1))))
+  (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left))
 
 (defun haskell-cabal-hook ()
   (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
