@@ -1,4 +1,5 @@
 ack
+aspell
 autoconf
 automake
 boot2docker
@@ -17,5 +18,6 @@ vim
 xz
 yap
 youtube-dl
+weechat --with-aspell --with-python --with-perl --with-ruby --with-guile --with-lua
 zsh-completions
 zsh-syntax-highlighting
