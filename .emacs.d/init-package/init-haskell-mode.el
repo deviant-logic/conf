@@ -51,7 +51,10 @@
   ;; Indent the below lines on columns after the current column.
   (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
   ;; Same as above but backwards.
-  (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left))
+  (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
+
+  (when (fboundp 'electric-indent-local-mode)
+    (electric-indent-local-mode -1)))
 
 (defun haskell-cabal-hook ()
   (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)

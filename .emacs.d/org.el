@@ -20,3 +20,6 @@
 (setq org-default-notes-file (concat org-directory "/capture.org"))
 
 (global-set-key (kbd "C-c c") 'org-capture)
+
+;; TODOs
+(setq org-todo-keywords '((type "TODO" "NEXT" "WAIT" "|" "DONE")))
