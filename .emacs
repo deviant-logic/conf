@@ -83,7 +83,7 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 (global-set-key (kbd "C-c .")
-                (lambda () 
+                (lambda ()
                   (interactive)
                   (find-file "~/.emacs")))
 
@@ -119,31 +119,31 @@
 
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/"))
 (setq el-get-sources
       `((:name flycheck
-	       :type github
-	       :pkgname "flycheck/flycheck")
-        ;; (:name haskell-mode
-	;;        :type elpa
-	;;        :repo ("marmalade" . "http://marmalade-repo.org/packages/"))
-        (:name auctex
-               :type elpa)))
+               :type github
+               :pkgname "flycheck/flycheck")))
 
 (setq el-get-packages
       `(git-gutter-fringe
-	magit
-	paredit
-	diminish
+        magit
+        auctex
+        paredit
+        diminish
         haskell-mode
-	rainbow-delimiters
-	smex
-	solarized-emacs
-	twilight-anti-bright-theme
-	exec-path-from-shell))
+        rainbow-delimiters
+        smex
+        solarized-emacs
+        twilight-anti-bright-theme
+        exec-path-from-shell
+        tracking
+        weechat))
 
 (el-get 'sync
-	(append el-get-packages
-		(mapcar 'el-get-source-name el-get-sources)))
+        (append el-get-packages
+                (mapcar 'el-get-source-name el-get-sources)))
 
 ; (load-theme 'twilight-anti-bright t)
 (load-theme 'solarized-dark t)
