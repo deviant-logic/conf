@@ -103,6 +103,15 @@
 (setq kill-read-only-ok t
       view-read-only    t)
 
+; whitespace
+
+(setq whitespace-style
+      '(face tabs trailing lines-tail
+             space-before-tab newline
+             indentation space-after-tab
+             tab-mark))
+(global-whitespace-mode 1)
+
 ; el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
