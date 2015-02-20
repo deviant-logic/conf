@@ -55,6 +55,10 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (setq eldoc-minor-mode-string nil)
 
+; gc
+
+(setq gc-cons-threshold 20000000)
+
 ; parentheses
 
 (setq show-paren-style 'expression)
@@ -140,7 +144,8 @@
         magit
         auctex
         paredit
-        diminish
+        delight
+        flx
         haskell-mode
         rainbow-delimiters
         smex
