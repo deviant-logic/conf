@@ -26,6 +26,7 @@ alias ocaml='ledit -h ~/.ocaml_history ocaml'
 if [ -x `which vim` ]; then
   alias vi=vim
 fi
+alias R='R --no-save'
 
 ##### functions #####
 typeset -U fpath

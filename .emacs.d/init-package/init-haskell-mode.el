@@ -8,8 +8,9 @@
 
 (defun haskell-hook ()
   (turn-on-haskell-indent)
-  (turn-on-haskell-font-lock)
-  (turn-on-haskell-decl-scan)
+  ; (turn-on-haskell-font-lock)
+  ; (turn-on-haskell-decl-scan)
+  (interactive-haskell-mode)
   ; (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
   ; (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
@@ -35,7 +36,7 @@
   ;; Contextually do clever things on the space key, in particular:
   ;;   1. Complete imports, letting you choose the module name.
   ;;   2. Show the type of the symbol after the space.
-  (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
+  ; (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
 
   ;; Switch to the appropriate cabal file
 
@@ -47,7 +48,7 @@
 
   ;; Jump to the definition of the current symbol.
   ; (define-key haskell-mode-map (kbd "M-.") 'haskell-mode-tag-find)
-
+  (define-key haskell-mode-map (kbd "M-.") 'haskell-mode-jump-to-def-or-tag)
   ;; Indent the below lines on columns after the current column.
   (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
   ;; Same as above but backwards.

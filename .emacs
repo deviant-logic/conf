@@ -109,11 +109,17 @@
 
 ; whitespace
 
+(setq-default fill-column 100)
+
 (setq whitespace-style
       '(face tabs trailing lines-tail
              space-before-tab newline
              indentation space-after-tab
              tab-mark))
+
+;; setting nil uses `fill-column'
+(setq whitespace-line-column nil)
+
 (global-whitespace-mode 1)
 
 ; el-get
@@ -153,7 +159,9 @@
         twilight-anti-bright-theme
         exec-path-from-shell
         tracking
-        weechat))
+        weechat
+        ess
+        markdown-mode))
 
 (el-get 'sync
         (append el-get-packages
