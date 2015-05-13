@@ -121,6 +121,7 @@
 (setq whitespace-line-column nil)
 
 (global-whitespace-mode 1)
+(setq whitespace-global-modes '(not weechat-mode))
 
 ; el-get
 
@@ -161,7 +162,8 @@
         tracking
         weechat
         ess
-        markdown-mode))
+        markdown-mode
+        multiple-cursors))
 
 (el-get 'sync
         (append el-get-packages
