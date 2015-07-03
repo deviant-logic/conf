@@ -82,9 +82,7 @@
                    (join-line -1)))
 
 (global-set-key (kbd "C-c m") 'compile)
-
 (global-set-key (kbd "C-c j") 'shell)
-(global-set-key (kbd "C-c g") 'magit-status)
 
 (global-set-key (kbd "C-c .")
                 (lambda ()
@@ -147,8 +145,7 @@
                :pkgname "flycheck/flycheck")))
 
 (setq el-get-packages
-      `(git-gutter-fringe
-        magit
+      `(magit
         auctex
         paredit
         delight
