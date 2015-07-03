@@ -54,6 +54,8 @@
   ;; Same as above but backwards.
   (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
 
+  (define-key haskell-interactive-mode-map (kbd "C-c C-u") 'haskell-interactive-mode-kill-whole-line)
+
   (when (fboundp 'electric-indent-local-mode)
     (electric-indent-local-mode -1)))
 
