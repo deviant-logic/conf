@@ -160,7 +160,10 @@
         weechat
         ess
         markdown-mode
-        multiple-cursors))
+        multiple-cursors
+        evil
+        evil-matchit
+        evil-surround))
 
 (el-get 'sync
         (append el-get-packages
