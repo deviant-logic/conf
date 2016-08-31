@@ -41,6 +41,8 @@ bindkey -e
 autoload -U compinit
 compinit
 
+compdef conf=git # use git completion for my conf script
+
 ##### history #####
 
 HISTSIZE=1000
@@ -75,8 +77,14 @@ syntax_highlighting=/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highligh
 
 setopt interactive_comments
 export PAGER=less
-export EDITOR=vi
+if [ -x `which vim` ]; then
+  export EDITOR=vim
+else
+  export EDITOR=vi
+fi
 export REPORTTIME=2
+
+stty dsusp undef # let C-y work in ghci
 
 ##### but if I'm in emacs... #####
 
@@ -85,3 +93,6 @@ if [[ $EMACS = t ]]; then
     export PAGER=cat
 fi
 
+##### iTerm2 integration #####
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
