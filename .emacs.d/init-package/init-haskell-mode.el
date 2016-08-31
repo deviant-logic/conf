@@ -3,8 +3,13 @@
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-cabal-mode-hook 'haskell-cabal-hook)
 
-(custom-set-variables '(haskell-process-type 'cabal-repl)
-                      '(haskell-font-lock-symbols t))
+; (setq haskell-process-path-cabal "nix-cabal")
+(setq haskell-process-path-cabal "new-repl")
+
+(custom-set-variables '(haskell-process-type 'cabal-repl))
+(custom-set-variables '(haskell-font-lock-symbols t))
+;; (custom-set-variables '(haskell-process-type 'cabal-repl)
+;;                       '(haskell-font-lock-symbols t))
 
 (defun haskell-hook ()
   (turn-on-haskell-indent)

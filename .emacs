@@ -55,6 +55,8 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (setq eldoc-minor-mode-string nil)
 
+(add-hook 'el-get-package-menu-mode-hook 'hl-line-mode)
+
 ; gc
 
 (setq gc-cons-threshold 20000000)
@@ -121,6 +123,11 @@
 (global-whitespace-mode 1)
 (setq whitespace-global-modes '(not weechat-mode))
 
+;; org-mode
+
+(with-eval-after-load 'org
+  (load (concat (file-name-as-directory user-emacs-directory) "org.el")))
+
 ; el-get
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -142,7 +149,10 @@
 (setq el-get-sources
       `((:name flycheck
                :type github
-               :pkgname "flycheck/flycheck")))
+               :pkgname "flycheck/flycheck")
+        (:name reykjavik-theme
+               :type github
+               :pkgname "mswift42/reykjavik-theme")))
 
 (setq el-get-packages
       `(magit
@@ -155,19 +165,29 @@
         smex
         solarized-emacs
         twilight-anti-bright-theme
+        sublime-themes
+        assemblage-theme
+        clues-theme
+        spacegray-theme
         exec-path-from-shell
         tracking
         weechat
         ess
         markdown-mode
         multiple-cursors
-        evil
-        evil-matchit
-        evil-surround))
+        isearch-symbol-at-point
+        ;; evil
+        ;; evil-matchit
+        ;; evil-surround
+        nlinum
+        yasnippet))
 
 (el-get 'sync
         (append el-get-packages
                 (mapcar 'el-get-source-name el-get-sources)))
 
 ; (load-theme 'twilight-anti-bright t)
-(load-theme 'solarized-dark t)
+; (load-theme 'solarized-dark t)
+; (require 'spacegray-theme nil 'noerror)
+
+(require 'reykjavik-theme nil 'noerror)
