@@ -55,7 +55,10 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (setq eldoc-minor-mode-string nil)
 
-(add-hook 'el-get-package-menu-mode-hook 'hl-line-mode)
+(when (fboundp 'winner-mode)
+  (winner-mode 1))
+
+; (add-hook 'el-get-package-menu-mode-hook 'hl-line-mode)
 
 ; gc
 
@@ -128,66 +131,137 @@
 (with-eval-after-load 'org
   (load (concat (file-name-as-directory user-emacs-directory) "org.el")))
 
-; el-get
+;; packages
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(setq el-get-user-package-directory
-      "~/.emacs.d/init-package")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
-
+(require 'package)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
-(setq el-get-sources
-      `((:name flycheck
-               :type github
-               :pkgname "flycheck/flycheck")
-        (:name reykjavik-theme
-               :type github
-               :pkgname "mswift42/reykjavik-theme")))
+             '("melpa" . "https://melpa.org/packages/"))
 
-(setq el-get-packages
-      `(magit
-        auctex
-        paredit
-        delight
-        flx
-        haskell-mode
-        rainbow-delimiters
-        smex
-        solarized-emacs
-        twilight-anti-bright-theme
-        sublime-themes
-        assemblage-theme
-        clues-theme
-        spacegray-theme
-        exec-path-from-shell
-        tracking
-        weechat
-        ess
-        markdown-mode
-        multiple-cursors
-        isearch-symbol-at-point
-        ;; evil
-        ;; evil-matchit
-        ;; evil-surround
-        nlinum
-        yasnippet))
+(package-initialize)
 
-(el-get 'sync
-        (append el-get-packages
-                (mapcar 'el-get-source-name el-get-sources)))
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-; (load-theme 'twilight-anti-bright t)
-; (load-theme 'solarized-dark t)
-; (require 'spacegray-theme nil 'noerror)
+(eval-when-compile
+  (require 'use-package))
 
-(require 'reykjavik-theme nil 'noerror)
+(setq use-package-always-ensure t)
+
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize))
+
+;; (use-package color-theme-modern
+;;   :config
+;;   (load-theme 'charcoal-black t t)
+;;   (enable-theme 'charcoal-black))
+
+(use-package nord-theme
+  :config
+  (load-theme 'nord t))
+
+(use-package delight)
+
+(use-package paredit
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+  :delight (paredit-mode " ()"))
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+(use-package emacs
+  :delight
+  (emacs-lisp-mode "Elisp" :major)
+  (global-whitespace-mode nil))
+
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t
+        ido-use-faces            nil))
+
+(use-package smex
+  :bind
+  ("M-x" . smex)
+  ("M-X" . smex-major-mode-commands))
+
+(use-package multiple-cursors
+  :bind
+  ("C-S-c C-S-c" . mc/edit-lines))
+
+(use-package ace-window
+  :bind
+  ("C-c o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?e ?u ?h ?t ?s)))
+
+(use-package dumb-jump)
+
+(use-package magit
+  :bind ("C-c g" . magit-status)
+  :config
+  (setq magit-repo-dirs          '("~/wip" "~/src")
+        magit-push-always-verify nil))
+
+;; (use-package magithub
+;;   :after magit
+;;   :config (magithub-feature-autoinject t))
+
+(use-package yaml-mode)
+
+(use-package mode-local)
+
+;; (use-package intero
+;;   :config
+;;   (add-hook 'intero-mode-hook      (lambda() (company-mode 0)))
+;;   (add-hook 'intero-repl-mode-hook (lambda() (company-mode 0)))
+;;   (setq-mode-local haskell-mode flycheck-check-syntax-automatically '(save mode-enabled)))
+
+(use-package haskell-mode
+  :config
+  (custom-set-variables '(haskell-process-type 'stack-ghci))
+  (custom-set-variables '(haskell-process-args-stack-ghci
+                          '("--ghci-options=-ferror-spans -fshow-loaded-modules" "--no-build" "--no-load")))
+  ;; (custom-set-variables '(haskell-process-type 'cabal-new-repl))
+  (custom-set-variables '(haskell-font-lock-symbols t))
+  (custom-set-variables '(haskell-indent-offset 2))
+  (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook    'haskell-mode-hook 'haskell-hook)
+
+  (defun haskell-hook ()
+    (turn-on-haskell-indent)
+    (interactive-haskell-mode)
+    ;; (intero-mode)
+    (when (fboundp 'electric-indent-local-mode)
+      (electric-indent-local-mode -1))
+    (set (make-local-variable 'whitespace-line-column) 200))
+
+  :bind (:map haskell-mode-map
+         ("C-c C-l" . haskell-process-load-file)
+         ("C-`"     . haskell-interactive-bring)
+         ("C-c c"   . haskell-process-cabal)
+         ("C-c C-t" . haskell-process-do-type)
+         ("C-c C-i" . haskell-process-do-info)
+         ("C-c C-f" . haskell-cabal-visit-file)
+         ("M-."     . haskell-mode-jump-to-def-or-tag)
+        :map haskell-cabal-mode-map
+         ("C-c C-c" . haskell-process-cabal-build)
+         ("C-c c"   . haskell-process-cabal)
+         ("C-`"     . haskell-interactive-bring)
+         ("C-c C-z" . haskell-interactive-switch)))
+
+(use-package scala-mode
+  :interpreter
+  ("scala" . scala-mode))
+
+(use-package ialign
+  :bind
+  ("C-x l" . ialign))
+
+(load custom-file 'noerror) ; setting custom-file does nothing otherwise
