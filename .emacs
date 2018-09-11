@@ -265,3 +265,21 @@
   ("C-x l" . ialign))
 
 (load custom-file 'noerror) ; setting custom-file does nothing otherwise
+
+;;; some packages to look into
+
+;; https://github.com/emacscollective/no-littering
+;; https://github.com/magnars/expand-region.el
+;; https://github.com/victorhge/iedit
+;; https://github.com/cyrus-and/zoom
+;; https://github.com/wasamasa/eyebrowse
+;; https://github.com/abo-abo/hydra
+;; https://github.com/syohex/emacs-git-messenger
+;; https://github.com/Wilfred/deadgrep
+;; https://github.com/fgeller/highlight-thing.el
+;; https://github.com/soutaro/hungry-delete.el
+;; https://github.com/rejeep/drag-stuff.el
+
+;; https://github.com/magnars/change-inner.el
+;; https://github.com/ganmacs/emacs-surround
+;; https://github.com/nivekuil/corral
