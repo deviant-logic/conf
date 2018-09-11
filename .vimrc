@@ -16,6 +16,9 @@ set list lcs=tab:»\ ,trail:·
 set wildmenu
 set wildmode=longest:full,full
 
+set splitbelow
+set splitright
+
 " key bindings
 
 " need to unmap space before it can be <Leader>
@@ -56,6 +59,9 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'kien/ctrlp.vim'
 
 Plugin 'rust-lang/rust.vim'
+" Plugin 'vim-syntastic/syntastic'
+
+Plugin 'jiangmiao/auto-pairs'
 
 " Plugin 'sirver/ultisnips'
 " Plugin 'honza/vim-snippets'
