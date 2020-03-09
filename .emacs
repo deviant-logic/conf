@@ -124,7 +124,7 @@
 (setq whitespace-line-column nil)
 
 (global-whitespace-mode 1)
-(setq whitespace-global-modes '(not weechat-mode))
+(setq whitespace-global-modes t)
 
 ;; org-mode
 
@@ -151,7 +151,7 @@
 (setq use-package-always-ensure t)
 
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
+  ; :if (memq window-system '(mac ns))
   :config
   (exec-path-from-shell-initialize))
 
@@ -175,10 +175,17 @@
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+(use-package ws-butler
+  :delight
+  :config
+  (ws-butler-global-mode t))
+
 (use-package emacs
   :delight
   (emacs-lisp-mode "Elisp" :major)
   (global-whitespace-mode nil))
+
+(use-package flx)
 
 (use-package flx-ido
   :config
@@ -186,14 +193,24 @@
   (setq ido-enable-flex-matching t
         ido-use-faces            nil))
 
+(use-package ido-completing-read+)
+
 (use-package smex
   :bind
   ("M-x" . smex)
   ("M-X" . smex-major-mode-commands))
 
+(use-package amx
+  :config
+  (amx-mode 1))
+
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines))
+
+(use-package expand-region
+  :bind
+  ("C-=" . er/expand-region))
 
 (use-package ace-window
   :bind
@@ -217,18 +234,12 @@
 
 (use-package mode-local)
 
-;; (use-package intero
-;;   :config
-;;   (add-hook 'intero-mode-hook      (lambda() (company-mode 0)))
-;;   (add-hook 'intero-repl-mode-hook (lambda() (company-mode 0)))
-;;   (setq-mode-local haskell-mode flycheck-check-syntax-automatically '(save mode-enabled)))
-
 (use-package haskell-mode
   :config
-  (custom-set-variables '(haskell-process-type 'stack-ghci))
+  ;; (custom-set-variables '(haskell-process-type 'stack-ghci))
   (custom-set-variables '(haskell-process-args-stack-ghci
                           '("--ghci-options=-ferror-spans -fshow-loaded-modules" "--no-build" "--no-load")))
-  ;; (custom-set-variables '(haskell-process-type 'cabal-new-repl))
+  (custom-set-variables '(haskell-process-type 'cabal-new-repl))
   (custom-set-variables '(haskell-font-lock-symbols t))
   (custom-set-variables '(haskell-indent-offset 2))
   (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
@@ -263,6 +274,17 @@
 (use-package ialign
   :bind
   ("C-x l" . ialign))
+
+(use-package weechat)
+
+(use-package try)
+
+(use-package eyebrowse
+  :config
+  (eyebrowse-mode t)
+  (eyebrowse-setup-opinionated-keys))
+
+(use-package focus)
 
 (load custom-file 'noerror) ; setting custom-file does nothing otherwise
 
