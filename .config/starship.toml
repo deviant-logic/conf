@@ -1,0 +1,47 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = false
+format = """
+$hostname\
+$character
+"""
+right_format = """
+$cmd_duration\
+$status\
+$jobs\
+$nix_shell\
+$directory
+"""
+
+[character]
+success_symbol = "[%](fg:none)"
+error_symbol = "[%](bold red)"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+[directory]
+format = ":[$path]($style)[$read_only]($read_only_style)"
+repo_root_format = "±[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
+truncation_length = 12
+style = "fg:none"
+repo_root_style = "bold purple"
+
+[git_branch]
+format = "[$symbol]($style)"
+# format = "[$symbol$branch(:$remote_branch)]($style) "
+# ignore_branches = ["main", "master"]
+
+[hostname]
+ssh_only = false
+format = "[$ssh_symbol$hostname]($style)"
+style = "(fg:none)"
+
+[nix_shell]
+# format = "[$symbol( \\($name\\))]($style) "
+format = "[$symbol]($style)"
+
+[status]
+format = "[\\[$status\\]]($style) "
+disabled = false
+

@@ -1,0 +1,18 @@
+# antidote zsh plugin list
+
+# first few entries are from https://getantidote.github.io/usage
+zsh-users/zsh-completions
+zdharma-continuum/fast-syntax-highlighting kind:defer
+
+# nix stuff
+chisui/zsh-nix-shell
+spwhitt/nix-zsh-completions
+
+# noodling
+hlissner/zsh-autopair
+fdellwing/zsh-bat
+mattmc3/zman
+
+# fzf nonsense
+mafredri/zsh-async # which is needed for...
+seletskiy/zsh-fuzzy-search-and-edit
