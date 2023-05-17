@@ -47,7 +47,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'dietsche/vim-lastplace'
 
