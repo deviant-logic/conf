@@ -143,14 +143,27 @@
 
 (use-package dumb-jump)
 
-(use-package exec-path-from-shell
-  :config
-  (exec-path-from-shell-initialize))
+(use-package eat
+  ;; have to run `eat-compile-terminfo' manually on install.
+  :straight (:type git
+             :host codeberg
+             :repo "akib/emacs-eat"
+             :files ("*.el" ("term" "term/*.el") "*.texi"
+                     "*.ti" ("terminfo/e" "terminfo/e/*")
+                     ("terminfo/65" "terminfo/65/*")
+                     ("integration" "integration/*")
+                     (:exclude ".dir-locals.el" "*-tests.el")))
+  :bind ("C-c j"   . eat)
+        ("C-c C-j" . eat-project))
 
 (use-package envrc
   :config
   (setq envrc-none-lighter nil)
   (envrc-global-mode))
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package expand-region
   :bind

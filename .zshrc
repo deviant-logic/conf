@@ -1,4 +1,3 @@
-
 # set up antidote; plugins go in ~/.zsh-plugins
 source ~/.zsh/init-antidote.zsh
 
@@ -57,3 +56,8 @@ autoload run-help
 # direnv and starship
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)" # prompt magic is now in ~/.config/starship.toml
+
+# trying out some emacs terminal stuff---needs to come after starship so it can tweak the prompt.
+if [ -n "$EAT_SHELL_INTEGRATION_DIR" ]; then
+    source "$EAT_SHELL_INTEGRATION_DIR/zsh"
+fi
