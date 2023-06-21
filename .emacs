@@ -245,6 +245,10 @@
 
 (use-package pcre2el)
 
+(use-package prescient
+  :config
+  (add-to-list 'completion-styles 'prescient))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
