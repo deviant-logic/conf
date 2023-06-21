@@ -7,6 +7,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-screen t)
 (setq disabled-command-function nil)
+(repeat-mode 1)
 
 (setq-default indent-tabs-mode nil)
 
@@ -39,13 +40,6 @@
 
 (electric-pair-mode 1)
 
-(defun toggle-bol/bti ()
-  (interactive)
-  (if (looking-at "^")
-      (back-to-indentation)
-    (beginning-of-line)))
-
-(global-set-key [remap move-beginning-of-line] 'toggle-bol/bti)
 (global-set-key (kbd "C-j")
                 (lambda ()
                   (interactive)
@@ -117,6 +111,12 @@
 
 ;; not-built-ins
 
+(use-package ace-window
+  :config
+  (setq aw-keys '(?a ?e ?i ?d ?h ?t ?\;))
+  :bind
+  ("C-c o" . ace-window))
+
 (use-package avy
   :config
   (avy-setup-default)
@@ -126,7 +126,7 @@
   :bind
   ("C-'" . avy-goto-char-timer)
   ("M-g M-g" . avy-goto-line)
-  ("C-c C-j" . avy-resume))
+  ("C-c C-'" . avy-resume))
 
 (use-package change-inner
   :bind
@@ -153,8 +153,12 @@
                      ("terminfo/65" "terminfo/65/*")
                      ("integration" "integration/*")
                      (:exclude ".dir-locals.el" "*-tests.el")))
-  :bind ("C-c j"   . eat)
-        ("C-c C-j" . eat-project))
+  :bind
+  ("C-c j"   . eat)
+  ("C-c C-j" . eat-project)
+  (:repeat-map ah/eat-repeat-map
+    ("p" . eat-previous-shell-prompt)
+    ("n" . eat-next-shell-prompt)))
 
 (use-package envrc
   :config
@@ -229,6 +233,12 @@
   :bind
   ("C-S-c C-S-c" . mc/edit-lines))
 
+;; mwim does a better job of my old toggle-bol/bti function.
+(use-package mwim
+  :bind
+  ([remap move-beginning-of-line] . mwim-beginning)
+  ([remap move-end-of-line] . mwim-end))
+
 (use-package nord-theme
   :config
   (load-theme 'nord t))
@@ -253,6 +263,15 @@
 (use-package string-inflection
   :bind
   ("C-c `" . string-inflection-all-cycle))
+
+(use-package visual-regexp-steroids
+  :config
+  (setq vr/engine 'pcre2el)
+  :bind
+  ("M-%"         . 'vr/replace)
+  ("C-S-c C-S-m" . 'vr/mc-mark)
+  ("C-M-r"       . 'vr/isearch-backward)
+  ("C-M-s"       . 'vr/isearch-forward))
 
 (use-package which-key
   :delight
