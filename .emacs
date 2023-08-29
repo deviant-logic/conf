@@ -48,6 +48,7 @@
                 (lambda ()
                   (interactive)
                   (find-file "~/.emacs")))
+
 (global-set-key (kbd "C-<tab>") 'completion-at-point)
 (global-set-key (kbd "M-<return>") 'toggle-frame-fullscreen)
 
@@ -98,7 +99,7 @@
 
 (use-package whitespace
   :straight (:type built-in)
-  :delight global-whitespace-mode
+  :delight whitespace-mode
   :config
   (setq whitespace-style
         '(face tabs trailing lines-tail
@@ -173,6 +174,10 @@
   :bind
   ("C-=" . er/expand-region))
 
+(use-package git-link
+  :bind
+  ("C-c C-g l" . git-link))
+
 (use-package haskell-mode
   :config
 
@@ -235,6 +240,14 @@
 
 ;; mwim does a better job of my old toggle-bol/bti function.
 (use-package mwim
+  :config
+  ;; moved `mwim-line-beginning' in front to mimic the old bol/bti
+  (setq mwim-beginning-position-functions
+        '(mwim-line-beginning
+          mwim-block-beginning
+          mwim-code-beginning
+          mwim-comment-beginning))
+
   :bind
   ([remap move-beginning-of-line] . mwim-beginning)
   ([remap move-end-of-line] . mwim-end))
