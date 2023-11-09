@@ -39,7 +39,7 @@ compinit
 
 # miscellaneous other options and things
 
-setopt auto_cd
+setopt auto_pushd
 setopt multios
 setopt extended_glob
 setopt interactive_comments
