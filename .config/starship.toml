@@ -40,6 +40,7 @@ style = "(fg:none)"
 [nix_shell]
 # format = "[$symbol( \\($name\\))]($style) "
 format = "[$symbol]($style)"
+heuristic = true
 
 [status]
 format = "[\\[$status\\]]($style) "
