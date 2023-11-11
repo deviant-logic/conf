@@ -4,9 +4,10 @@
 (tool-bar-mode     -1)
 (scroll-bar-mode   -1)
 (setf ring-bell-function 'ignore)
-(fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p) ;; apparently now there's `use-short-answers'?
 (setq inhibit-startup-screen t)
 (setq disabled-command-function nil)
+(setq native-comp-async-report-warnings-errors 'silent)
 (repeat-mode 1)
 
 (setq-default indent-tabs-mode nil)
@@ -76,30 +77,48 @@
 
 (use-package delight)
 
-;; emacs builtins (TODO: make a `use-builtin' macro)
+;; emacs builtins
 
-(use-package compile
-  :straight (:type built-in)
+(defmacro use-builtin (builtin &rest pkg-conf)
+  "Expands to a call to `use-package', with (:straight (:type built-in)) specified automatically."
+  (declare (indent defun))
+  `(use-package ,builtin
+     :straight (:type built-in)
+     ,@pkg-conf))
+
+(use-builtin compile
   :config
   (setq compilation-scroll-output t)
   :bind ("C-c m" . compile))
 
-(use-package eldoc
-  :straight (:type built-in)
+(use-builtin eldoc
   :delight)
 
-(use-package ibuffer
-  :straight (:type built-in)
+(use-builtin ffap
+  :config (ffap-bindings))
+
+(use-builtin ibuffer
   :bind ("C-x C-b" . ibuffer))
 
-(use-package uniquify
-  :straight (:type built-in)
+(use-builtin misc
+  :bind
+  ("C-c d" . duplicate-dwim)
+  (:repeat-map ah/misc-repeat-map
+               ("d" . duplicate-dwim)))
+
+(use-builtin simple
+  :bind
+  ([remap capitalize-word] . capitalize-dwim)
+  ([remap upcase-word]     . upcase-dwim)
+  ([remap downcase-word]   . downcase-dwim))
+
+(use-builtin uniquify
   :config
   (setq uniquify-buffer-name-style 'reverse))
 
-(use-package whitespace
-  :straight (:type built-in)
+(use-builtin whitespace
   :delight whitespace-mode
+  :delight global-whitespace-mode
   :config
   (setq whitespace-style
         '(face tabs trailing lines-tail
@@ -128,6 +147,12 @@
   ("C-'" . avy-goto-char-timer)
   ("M-g M-g" . avy-goto-line)
   ("C-c C-'" . avy-resume))
+
+(use-package calibredb
+  :config
+  (setq calibredb-root-dir "~/Calibre Library")
+  (setq calibredb-db-dir
+        (expand-file-name "metadata.db" calibredb-root-dir)))
 
 (use-package change-inner
   :bind
@@ -256,10 +281,25 @@
   :config
   (load-theme 'nord t))
 
+(use-package nov
+  :mode ("\\.epub\\'" . nov-mode))
+
+(use-package nov-xwidget
+  :straight (:type git :host github :repo "chenyanming/nov-xwidget" )
+  :after nov
+  :config
+  (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
+  (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files))
+
 (use-package pcre2el)
+
+(use-package pdf-tools
+  :config
+  (pdf-tools-install))
 
 (use-package prescient
   :config
+  (prescient-persist-mode)
   (add-to-list 'completion-styles 'prescient))
 
 (use-package rainbow-delimiters
@@ -294,6 +334,11 @@
   :delight
   :config
   (which-key-mode))
+
+(use-package whole-line-or-region
+  :delight whole-line-or-region-local-mode
+  :config
+  (whole-line-or-region-global-mode 1))
 
 (use-package ws-butler
   :delight
