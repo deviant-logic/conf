@@ -302,16 +302,25 @@
   (prescient-persist-mode)
   (add-to-list 'completion-styles 'prescient))
 
+(use-package puni
+  :init
+  (puni-global-mode)
+  :bind
+  (:map puni-mode-map ;; trying to make it do paredit...
+        ("C-)" . puni-slurp-forward)
+        ("C-(" . puni-slurp-backward)
+        ("C-}" . puni-barf-forward)
+        ("C-{" . puni-barf-backward)
+        ("C-M-t" . puni-transpose)
+        ("C-M-S-T" . puni-convolute)
+        ;; ("M-s" . puni-splice) ;; paredit binds this, but I want to
+                                 ;; try the standard binding.
+        ;; ("M-S" . puni-split)  ;; ditto
+        ("M-<up>"   . puni-splice-killing-backward)
+        ("M-<down>" . puni-splice-killing-forward)))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package smartparens ; https://ebzzry.com/en/emacs-pairs/
-  :delight
-  :custom
-  (sp-show-pair-from-inside nil)
-  (sp-base-key-bindings 'paredit)
-  :hook
-  (prog-mode . smartparens-strict-mode))
 
 (use-package smartscan
   :hook
