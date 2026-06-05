@@ -1,3 +1,5 @@
+;;  -*- lexical-binding: nil; -*-
+
 ;; stuff that should work when the rest of my .emacs is broken
 
 (blink-cursor-mode -1)
@@ -137,6 +139,10 @@
   :bind
   ("C-c o" . ace-window))
 
+(use-package amx
+  :config
+  (amx-mode 1))
+
 (use-package avy
   :config
   (avy-setup-default)
@@ -147,6 +153,11 @@
   ("C-'" . avy-goto-char-timer)
   ("M-g M-g" . avy-goto-line)
   ("C-c C-'" . avy-resume))
+
+(use-package auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t))
 
 (use-package calibredb
   :config
@@ -185,6 +196,15 @@
   (:repeat-map ah/eat-repeat-map
     ("p" . eat-previous-shell-prompt)
     ("n" . eat-next-shell-prompt)))
+
+(use-package ef-themes
+  :init
+  (ef-themes-take-over-modus-themes-mode 1)
+  :config
+  (setq modus-themes-mixed-fonts t)
+  (setq modus-themes-italic-constructs t)
+
+  (modus-themes-load-theme 'ef-maris-dark))
 
 (use-package envrc
   :config
@@ -259,6 +279,13 @@
   (setq magit-repo-dirs          '("~/wip" "~/src")
         magit-push-always-verify nil))
 
+(use-package magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
+
+;; (use-package majutsu
+;;   :straight (:host github :repo "0WD0/majutsu"))
+
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines))
@@ -277,9 +304,17 @@
   ([remap move-beginning-of-line] . mwim-beginning)
   ([remap move-end-of-line] . mwim-end))
 
-(use-package nord-theme
-  :config
-  (load-theme 'nord t))
+
+;; nord is causing me trouble due to not having the lexical-binding
+;; cookie set, so we're switching to `ef-themes' (above) for now.
+
+;; (use-package nord-theme
+;;     :straight (:type git
+;;                :host github
+;;                :repo "nordtheme/emacs"
+;;                :branch "main")
+;;     :config
+;;     (load-theme 'nord t))
 
 (use-package nov
   :mode ("\\.epub\\'" . nov-mode))
@@ -328,7 +363,24 @@
 
 (use-package string-inflection
   :bind
-  ("C-c `" . string-inflection-all-cycle))
+  ("C-c `" . string-inflection-all-cycle)
+  (:repeat-map ah/string-inflection-repeat-map
+    ("`" . string-inflection-all-cycle)))
+
+(use-package typst-ts-mode
+  :straight (:type git
+                   :host codeberg
+                   :repo "meow_king/typst-ts-mode"
+                   :files (:defaults "*.el"))
+  :config
+  (with-eval-after-load 'eglot
+  (with-eval-after-load 'typst-ts-mode
+    (add-to-list 'eglot-server-programs
+                 `((typst-ts-mode) .
+                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
+                                          "tinymist"
+                                          "typst-lsp")))))))
+
 
 (use-package visual-regexp-steroids
   :config

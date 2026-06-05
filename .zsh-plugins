@@ -12,7 +12,11 @@ spwhitt/nix-zsh-completions
 hlissner/zsh-autopair
 fdellwing/zsh-bat
 mattmc3/zman
+momo-lab/zsh-replace-multiple-dots
 
 # fzf nonsense
 mafredri/zsh-async # which is needed for...
 seletskiy/zsh-fuzzy-search-and-edit
+
+# Bang on C-z to cycle through jobs
+aemonge/zsh-cycle-jobs

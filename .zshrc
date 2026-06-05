@@ -50,7 +50,7 @@ alias vi=vim
 alias ls='ls -GF'
 
 unalias run-help # https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#index-run_002dhelp_002c-use-of
-autoload run-help
+autoload run-help run-help-git run-help-ip run-help-openssl run-help-sudo
 
 
 # direnv and starship
@@ -61,3 +61,5 @@ eval "$(starship init zsh)" # prompt magic is now in ~/.config/starship.toml
 if [ -n "$EAT_SHELL_INTEGRATION_DIR" ]; then
     source "$EAT_SHELL_INTEGRATION_DIR/zsh"
 fi
+
+export RIPGREP_CONFIG_PATH=~/.rgrc
